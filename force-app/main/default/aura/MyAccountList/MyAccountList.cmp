@@ -1,0 +1,22 @@
+<aura:component controller= "MyAccountListController" implements="flexipage:availableForAllPageTypes">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="acc" type="Account"/>
+    
+    <aura:attribute name="Account" type="Account"/>
+    <aura:attribute name="Columns" type="List" />
+    <aura:handler event="force:refreshView" action="{!c.show}"/>
+    <force:recordData aura:id="recordData" targetFields="{!v.acc}" 
+                      fields="Name,AccountNumber,AnnualRevenue"/>
+    <lightning:card>
+        <lightning:input label="Account Name" value="{!v.acc.Name}"/>
+        <lightning:input label="Phone" value="{!v.acc.Phone}"/>
+        <lightning:button label="Save Record" onclick="{!c.save}"/>
+    </lightning:card>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.myAction}" />
+    <lightning:card iconName="standard:account" title="{! 'Account List '}">
+    
+    <lightning:datatable data="{! v.Account }" columns="{! v.Columns }" keyField="Id" hideCheckboxColumn="true"/>
+
+</lightning:card>
+</aura:component>
